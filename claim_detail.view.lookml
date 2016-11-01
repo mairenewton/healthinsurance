@@ -159,6 +159,22 @@
     value_format_name: usd
     sql: ${derv_paybl_amt}/${count}
     
+  - measure: volume
+    type: sum
+    hidden: true
+    sql: ${copay_amt}
+    
+  - measure: count_distinct_products
+    type: count_distinct
+    hidden: true
+    sql: ${claim_id}
+    html: |
+      {% if volume._value < 10000 %}
+      <div> null </div>
+      {% else %}
+      <div> {{ rendered_value }}</div>
+      {% endif %}
+
   - measure: derv_avg_paid_per_claim_scatter
     type: number
     value_format_name: usd
@@ -171,5 +187,4 @@
     
   - measure: count
     type: count
-    html: |
-      <div> </div>
+    
