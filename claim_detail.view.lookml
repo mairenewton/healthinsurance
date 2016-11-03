@@ -187,4 +187,11 @@
     
   - measure: count
     type: count
+    hidden: true
+    
+  - measure: claim_count
+    type: number
+    sql: ${count} * 1000
+    value_format: 0.000,," M"
+    
     
