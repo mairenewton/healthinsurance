@@ -164,16 +164,28 @@
     hidden: true
     sql: ${copay_amt}
     
-  - measure: count_distinct_products
-    type: count_distinct
-    hidden: true
-    sql: ${claim_id}
+  - measure: total_deduct_amt
+    type: sum
+    sql: ${TABLE}.deduct_amt
+    value_format_name: decimal_0
     html: |
-      {% if volume._value < 10000 %}
-      <div> null </div>
+      {% if total_deduct_amt._value  <100000 %}
+        hidden
       {% else %}
-      <div> {{ rendered_value }}</div>
+        {{ rendered_value }}
       {% endif %}
+
+#     measure: total_transaction {
+#     type: sum
+#     sql: ${TABLE}.total_transaction ;;
+#     value_format_name: decimal_0
+#     html:
+#       {% if total_transaction._value<1000 %}
+#         hidden
+#       {% else %}
+#         {{rendered_value}}
+#       {% endif %} ;;
+#     }
 
   - measure: derv_avg_paid_per_claim_scatter
     type: number
